@@ -17,15 +17,10 @@ builder.Services.AddControllersWithViews(o =>
     o.Filters.Add<HandleExceptionFilter>();
 });
 
-var connectionString = Environment.GetEnvironmentVariable("MySqlConnectionString");
-if(connectionString != null)
-{
-    builder.Services.AddDbContext<AppDbContext>(options => options.UseMySQL(connectionString));
-}
-else
-{
-    builder.Services.AddDbContext<AppDbContext>(options => builder.Configuration.GetConnectionString("MySqlConnectionString"));
-}
+var connectionString = Environment.GetEnvironmentVariable("MySqlConnectionString") ?? 
+                       builder.Configuration.GetConnectionString("MySqlConnectionString");
+
+builder.Services.AddDbContext<AppDbContext>(options => options.UseMySQL(connectionString));
 
 
 
