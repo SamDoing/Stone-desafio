@@ -16,4 +16,4 @@ jobs:
     - name: BuildDocker
       run: docker build -t api .
     - name: RunDocker
-      run: docker run api -d
+      run: docker run -d api
