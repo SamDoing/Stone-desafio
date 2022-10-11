@@ -13,5 +13,7 @@ jobs:
 
     steps:
     - uses: actions/checkout@v3
+    - name: BuildDocker
+      run: docker build -t api .
     - name: RunDocker
-      run:  docker build
+      run: docker run api -d
